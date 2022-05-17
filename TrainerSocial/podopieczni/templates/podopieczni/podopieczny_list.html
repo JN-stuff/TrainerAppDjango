@@ -1,0 +1,59 @@
+{% extends "podopieczni/podopieczny_base.html" %}
+
+{% block pregroup %}
+
+<div class="col-md-4">
+  <div class="content">
+
+    {% if user.is_authenticated %}
+    <h2>Witaj w zakładce zarządzania profilami podopiecznych
+      <a href="{% url 'posts:for_user' username=user.username %}">
+        @{{user.username}}
+      </a>
+    </h2>
+    {% endif %}
+
+
+
+
+  </div>
+
+  {% if user.is_authenticated %}
+  <a href="{% url 'podopieczni:create' %}" class='btn btn-md btn-fill btn-primary'>
+    <span>Stwórz nowy profil podopiecznego!</span>
+  </a>
+  {% endif %}
+</div>
+
+{% endblock %}
+
+{% block podopieczny_content %}
+<div class="col-md-8">
+  <div class="list-group">
+    {% for podopieczny in object_list %}
+    <h3>Dostępne profile podopiecznych:</h3>
+    <a class='list-group-item' href="{% url 'podopieczni:single' slug=podopieczny.slug %}">
+      <h3 class='title list-group-item-heading'>{{podopieczny.imię_i_nazwisko}}</h3>
+      <div class="list-group-item-text container-fluid">
+        {{podopieczny.description_html|safe}}
+
+        <div class="row">
+          <div class="col-md-4">
+            <span class='badge'>{{podopieczny.members.count}}</span>
+            Przydzieleni trenerzy
+
+          </div>
+
+          <div class="col-md-4">
+            <span class='badge'>{{podopieczny.posts.count}}</span>
+            Komentarzy
+          </div>
+
+        </div>
+
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

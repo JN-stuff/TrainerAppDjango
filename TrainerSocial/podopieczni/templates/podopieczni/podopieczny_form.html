@@ -1,0 +1,17 @@
+{% extends "podopieczni/podopieczny_base.html" %}
+{% load bootstrap3 %}
+
+{% block podopieczny_content %}
+
+<h4>Stwórz nowy profil podopiecznego:</h4>
+  <form method='POST' action="#" enctype='multipart/form-data'>
+
+
+    <form action="{% url 'podopieczni:create' %}" method="post" id='podopiecznyForm'>
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      <input type="submit" class='btn btn-primary btn-lg' value="Stwórz">
+      
+    </form>
+  </form>
+{% endblock %}

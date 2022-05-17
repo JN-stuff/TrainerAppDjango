@@ -1,0 +1,52 @@
+{% extends "podopieczni/podopieczny_base.html" %}
+<div class="container-fluid">
+
+
+{% block pregroup %}
+
+
+
+<h1>{{podopieczny.imię_i_nazwisko}}</h1>
+<!-- <h2>Member Count: {{podopieczny.members.count}}</h2> -->
+<div class="content center-block">
+  {% if user in podopieczny.members.all %}
+
+    <a href="{% url 'podopieczni:leave' slug=podopieczny.slug %}" class='btn btn-lg btn-fill btn-primary'> <span>Odrzuć dostęp do profilu</span></a>
+  {% else %}
+    <a href="{% url 'podopieczni:join' slug=podopieczny.slug %}" class='btn btn-lg btn-fill btn-primary'> <span>Zyskaj dostęp do profilu</span></a>
+
+  {% endif %}
+
+</div>
+
+{% endblock %}
+
+{% block podopieczny_content %}
+<h4>Email: {{podopieczny.email}}</h4>
+<h4>Płeć: {{podopieczny.płeć}}</h4>
+<h4>Wzrost: {{podopieczny.wzrost}}</h4>
+<h4>Waga: {{podopieczny.waga}}</h4>
+<h4>Opis: {{podopieczny.opis}}</h4>
+<h4>Cel: {{podopieczny.cel}}</h4>
+<h4>Rodzaj treningu: {{podopieczny.rodzaj_treningu}}</h4>
+<h3>Plan treningu:</h3>
+<div class="plan">
+  <iframe src="\media/{{podopieczny.plan}}" width="900" height="900"></iframe>
+</div>
+
+
+
+<div class="col-md-8">
+
+  {% if podopieczny.posts.count == 0 %}
+    <h3>Nie dodano jeszcze żadnych komentarzy</h3>
+  {% else %}
+    {% for post in podopieczny.posts.all %}
+      {% include "posts/_post.html" %}
+    {% endfor %}
+
+  {% endif %}
+
+</div>
+</div>
+{% endblock %}

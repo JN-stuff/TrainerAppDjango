@@ -1,0 +1,29 @@
+body{
+  background-color: #040405;
+}
+
+.flex-nowrap {
+    -webkit-flex-wrap: nowrap!important;
+    -ms-flex-wrap: nowrap!important;
+    flex-wrap: nowrap!important;
+}
+.flex-row {
+    display:flex;
+    -webkit-box-orient: horizontal!important;
+    -webkit-box-direction: normal!important;
+    -webkit-flex-direction: row!important;
+    -ms-flex-direction: row!important;
+    flex-direction: row!important;
+}
+.navbar {
+  background-color:white;
+  border-radius:5px;
+}
+h1,h2,h3,h4{
+  color:white;
+}
+iframe {
+     position: relative;
+     margin-right: auto;
+     margin-left: 10%;
+}
